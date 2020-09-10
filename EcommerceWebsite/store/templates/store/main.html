@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+    <title>EcommerceWebsite</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+
+    <script type="text/javascript"> <!--判斷使用者使否登入-->
+        var user = "{{request.user}}"
+<!--為了post資料，你要給他csrf-->
+        function getToken(name){
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+// cookies
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/" // 他只是自己創了一個cookie
+		}
+		console.log('Cart:', cart)
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'store' %}">EcommerceWebsite</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white; width:auto;">
+              {{request.user}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'register' %}" id="register">Register</a>
+                <a class="dropdown-item" href="{% url 'login' %}" id="login">Log in</a>
+                <a class="dropdown-item" href="{% url 'logout' %}" id="logout">Log out</a>
+                <a class="dropdown-item" href="/accounts/profile/{{request.user.email}}" id="profile">Profile</a>
+            </div>
+            </li>
+            </ul>
+
+
+            <a href="{% url 'cart' %}">
+                <img id="cart-icon" src="/images/cart.png">
+            </a>
+            <p id="cart-total">{{cartItems}}</p>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+
+    <!-- js，下面三條是bootstrap，最後才是自己的 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script> <!--串接自己的js-->
+
+    <script type="text/javascript">
+    	if (user == 'AnonymousUser'){
+		 	document.getElementById('profile').remove();
+		 	document.getElementById('logout').classList.add("hidden");
+		 }
+        if (user != 'AnonymousUser'){
+		 	document.getElementById('login').classList.add("hidden");
+		 	document.getElementById('register').remove();
+
+		 }
+    </script >
+
+</body>
+</html>
+

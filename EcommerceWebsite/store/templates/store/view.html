@@ -1,0 +1,56 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+  <head>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'view/styles.css' %}" rel="stylesheet">
+  </head>
+<!-- Demo page craeted by https://github.com/petr-goca -->
+
+
+<section aria-label="Main content" role="main" class="product-detail">
+    <div class="shadow">
+      <div>
+      <a href="javascript:history.back()">
+        <img id="cart-icon" src="/images/exit.png" style="float:right;"></a>
+        </div>
+      <div class= detail-top">
+        <div class="cols">
+          <div class="left-col">
+              <img src="{{object.image.url}}">
+          </div>
+
+          <div class="right-col">
+            <h1 itemprop="name">{{object.name}}</h1>
+              <div class="price-shipping">
+                <div class="price" id="price-preview" quickbeam="price" quickbeam-price="800">
+                  {{object.price}}
+                </div>
+              </div>
+                <div class="btn-and-quantity-wrap">
+                  <div class="btn-and-quantity">
+                    <div id="AddToCart" quickbeam="add-to-cart">
+                      <span class="view-update-cart" role="button" data-product="{{object.id}}" data-action="add">Add to Cart</span>
+                    </div>
+                    <div class="spinner">
+                      <button class="btn minus" onclick="minusFunction()"></button>
+                      <input type="text" id="quantity" name="quantity" value="1" class="quantity-selector" style="font-size: 18px;">
+                      <span class="q">Qty</span>
+                      <button class="btn plus" onclick="addFunction()"></button>
+                    </div>
+
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock content %}
