@@ -1,7 +1,0 @@
-Django==3.0.8
-Pillow
-django-crispy-forms
-pip==20.2.2
-psycopg2
-uwsgi
-django-cors-headers
