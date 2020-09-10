@@ -1,4 +1,3 @@
-# Django_EcommerceWebsite
 # 整體架構:
 ![image](https://github.com/Joyang0419/Django_EcommerceWebsite/blob/master/image/%E6%95%B4%E9%AB%94%E6%9E%B6%E6%A7%8B.jpg)
 使用者連接到GCP的VMP的ORT號，GCP的VM運行兩個container。
