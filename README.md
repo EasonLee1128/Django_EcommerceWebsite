@@ -20,3 +20,9 @@ NGINX和wsgi run django project的資訊透過Socket傳遞，然後在指定VM�
 點入購物車後，可以在調整訂單，若OK可以進入結帳，
 
 結帳串接Pypal的API，結完帳後即訂單成立。
+
+# Cart.js邏輯:
+
+使用addEventListener，當前端click按鈕(add to cart)，有兩個Function依照是否為網站用戶選擇使用。 
+- add cookie item: 若不是網站用戶，使用cookie紀錄用戶的購物車明細傳入後端，之後用reload更新網頁。
+- update user order: 用fetch將前端的資訊用json傳入後端更新訂單，之後用reload更新網頁。
