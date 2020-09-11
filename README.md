@@ -16,5 +16,7 @@ NGINX和wsgi run django project的資訊透過Socket傳遞，然後在指定VM�
 - 非網站用戶: 顯示Log out 跟 Profile，Profile內頁有可以修改帳戶資訊。
 
 右上角顯示目前購物數量，並可以進入購物車，
+
 點入購物車後，可以在調整訂單，若OK可以進入結帳，
+
 結帳串接Pypal的API，結完帳後即訂單成立。
