@@ -1,11 +1,11 @@
 # 整體架構:
 ![image](https://github.com/Joyang0419/Django_EcommerceWebsite/blob/master/image/%E6%95%B4%E9%AB%94%E6%9E%B6%E6%A7%8B.jpg)
 
-GOOGLE CLOUD PLATFORM的虛擬機使用DOCKER運行兩個container。
-- NGINX。
-- Wsgi run django project。
+Google Cloud Platform的虛擬機使用Docker運行兩個Container。
+- Nginx
+- Wsgi run django project
 
-NGINX與wsgi run django projec透過Socket溝通，然後將指定一個PORT給NGINX使用，提供使用者進入網站。
+Nginx與Wsgi透過Socket溝通，然後將指定一個Port給Nginx使用，提供使用者進入網站。
 
 # 網頁架構:
 ![image](https://github.com/Joyang0419/Django_EcommerceWebsite/blob/master/image/%E7%B6%B2%E7%AB%99%E6%B5%81%E7%A8%8B.jpg)
